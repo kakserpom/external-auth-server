@@ -82,6 +82,7 @@ JwtPlugin.initialize(externalAuthServer);
 FirebaseJwtPlugin.initialize(externalAuthServer);
 ForwardPlugin.initialize(externalAuthServer);
 NoopPlugin.initialize(externalAuthServer);
+PostgresPlugin.initialize(externalAuthServer);
 
 app.get("/ping", (req, res) => {
   res.statusCode = 200;
@@ -319,6 +320,9 @@ verifyHandler = async (req, res, options = {}) => {
               break;
             case "htpasswd":
               plugin = new HtPasswdPlugin(externalAuthServer, pluginConfig);
+              break;
+            case "postgres":
+              plugin = new PostgresPlugin(externalAuthServer, pluginConfig);
               break;
             case "ldap":
               plugin = new LdapPlugin(externalAuthServer, pluginConfig);
@@ -669,6 +673,7 @@ const merge = require("utils-merge");
 const PROTO_PATH =
   __dirname + "/../grpc/envoy/service/auth/v3/external_auth.proto";
 const googleProtos = require("google-proto-files");
+const {PostgresPlugin} = require("./plugin/postgres");
 
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   keepCase: true,

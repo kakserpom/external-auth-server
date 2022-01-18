@@ -40,7 +40,7 @@ class PostgresPlugin extends BasePlugin {
      * @param {*} res
      */
     verify(configToken, req, res) {
-        const plugin = this;
+        const plugin = this;localStorage
         let realm = plugin.config.realm
             ? plugin.config.realm
             : "external authentication server";
