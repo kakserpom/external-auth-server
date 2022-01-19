@@ -26,6 +26,7 @@ const { JwtPlugin } = require("./plugin/jwt");
 const { ForwardPlugin } = require("./plugin/forward");
 const { FirebaseJwtPlugin } = require("./plugin/firebase");
 const { NoopPlugin } = require("./plugin/noop");
+const {PostgresPlugin} = require("./plugin/postgres");
 
 // create app instance
 const externalAuthServer = new ExternalAuthServer();
@@ -673,7 +674,6 @@ const merge = require("utils-merge");
 const PROTO_PATH =
   __dirname + "/../grpc/envoy/service/auth/v3/external_auth.proto";
 const googleProtos = require("google-proto-files");
-const {PostgresPlugin} = require("./plugin/postgres");
 
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   keepCase: true,

@@ -1,11 +1,10 @@
 const {Pool} = require('pg')
-const params = url.parse(process.env.DB_URL);
-const auth = params.auth.split(':');
+const params = new URL(process.env.DB_URL)
 const config = {
-    user: auth[0],
-    password: auth[1],
+    user: params.username,
+    password: params.password,
     host: params.hostname,
-    port: params.port,
+    port: params.port || 5432,
     database: params.pathname.split('/')[1],
     ssl: true
 };
@@ -13,6 +12,7 @@ const pool = new Pool(config)
 const bcrypt = require('bcrypt');
 
 const {BasePlugin} = require("..");
+
 
 /**
  *
