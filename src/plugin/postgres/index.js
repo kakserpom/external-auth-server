@@ -85,7 +85,7 @@ class PostgresPlugin extends BasePlugin {
                 .connect()
                 .then(client => {
                     return client
-                        .query('SELECT * FROM basic_auth WHERE username = $1', [creds.username])
+                        .query('SELECT password FROM basic_auth WHERE username = $1', [creds.username])
                         .then(res => {
                             client.release()
                             let ok = false
